@@ -1,0 +1,20 @@
+import 'package:flutter/material.dart';
+//記述宣言
+void main() {
+  //Textウィジェットを定義する
+  const text = Text('Hello Flutter mobile development!');
+
+  //アプリケーションを作る
+  const application = MaterialApp(
+    //アプリを格子状に定義
+    home: Scaffold(
+      //全体を真ん中に寄せる
+      body: Center(
+        //子要素にtextウィジェットを表示する
+        child: text,
+      ),
+    ),
+  );
+  //アプリを走らせる。（絶対に書く）
+  runApp(application);
+}
