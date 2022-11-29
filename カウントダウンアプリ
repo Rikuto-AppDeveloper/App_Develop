@@ -1,0 +1,84 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(TimerApp());
+}
+
+class TimerApp extends StatelessWidget {
+  const TimerApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(debugShowCheckedModeBanner: false, home: TimerSystem());
+  }
+}
+
+class TimerSystem extends StatefulWidget {
+  @override
+  State<TimerSystem> createState() => _TimerSystemState();
+}
+
+class _TimerSystemState extends State<TimerSystem> {
+  int count = 60; //use count
+
+  Future<void> mainloop() async {
+    while (count >= 0) {
+      await Future<void>.delayed(const Duration(seconds: 1));
+      setState(() {
+        count--;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    mainloop();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white12,
+      body: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Container(
+            color: Colors.white12,
+            width: double.infinity,
+            height: 400,
+            alignment: Alignment.center,
+            child: Text('$count',
+                style: TextStyle(color: Colors.white, fontSize: 80)),
+          ),
+          Container(
+            width: double.infinity,
+            alignment: Alignment.center,
+            child: ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  count = count + 60;
+                });
+              },
+              child: Text('add 60s'),
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            alignment: Alignment.center,
+            child: ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  count = count + 120;
+                });
+              },
+              child: Text('add 120s'),
+            ),
+          ),
+        ],
+      )),
+    );
+  }
+}
